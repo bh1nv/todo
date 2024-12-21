@@ -1,0 +1,46 @@
+{% extends "todo/base.html" %}
+
+{% block title %}
+    Home
+{% endblock title %}
+
+{% block content %}
+{% comment %} List  {% endcomment %}
+  <ul class="list-group">
+    {% for task  in tasks %}    
+    <li class="list-group-item">
+      <input class="form-check-input me-1" type="checkbox" value="" id="firstCheckbox">
+      <label class="form-check-label" for="firstCheckbox"> <a href="{% url "task_detail" task.id %}" class="text-decoration-none text-reset">  {{ task.heading }} </a> </label>
+    </li>
+    {% empty %}
+    <div class="alert alert-primary" role="alert">
+      Not Added any Task
+    </div>
+      
+    {% endfor %}
+    
+  </ul>
+
+  {% comment %} form  {% endcomment %}
+  <div class="card my-4">
+    <div class="card-body">
+      <form method="POST" action="{% url "task_create" %}">
+        {% csrf_token %}
+        <div class="mb-3">
+          <label for="task_heading" class="form-label">Task</label>
+          <input type="text" class="form-control" id="task_heading" name="heading" aria-describedby="emailHelp" placeholder="Enter Your Task">
+        </div>
+        <div class="mb-3">
+          <label for="task_description" class="form-label">Description (Optional)</label>
+          <textarea class="form-control" id="task_description" name="description" rows="3" placeholder="Add some extra details here...."></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Add Task</button>
+      </form>
+    </div>
+  </div>
+
+
+{% endblock content %}
+
+
+

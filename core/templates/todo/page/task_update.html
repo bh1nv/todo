@@ -1,0 +1,30 @@
+{% extends "todo/base.html" %}
+
+{% block title %}
+    Add Task
+{% endblock title %}
+
+{% block content %}
+  {% comment %} form  {% endcomment %}
+  <div class="card my-4">
+    <div class="card-body">
+      <form method="POST" action="">
+        {% csrf_token %}
+        <div class="mb-3">
+          <label for="task_heading" class="form-label">Task</label>
+          <input type="text" class="form-control" id="task_heading" name="heading" aria-describedby="emailHelp" placeholder="Enter Your Task" {% if form.heading.value %}value="{{form.heading.value}}"{% endif %}>
+          <div id="emailHelp" class="form-text text-danger">{% for error  in form.heading.errors  %} <p> {{error}} </p> {% endfor %}</div>
+        </div>
+        <div class="mb-3">
+          <label for="task_description" class="form-label">Description (Optional)</label>
+          <textarea class="form-control" id="task_description" name="description" rows="3" placeholder="Add some extra details here....">{% if form.description.value  %}{{form.description.value}}{% endif %}</textarea>
+          <div id="emailHelp" class="form-text text-danger">{% for error  in form.description.errors  %} <p> {{error}} </p> {% endfor %}</div>
+        </div>
+        <button type="submit" class="btn btn-primary">Update Task</button>
+      </form>
+    </div>
+  </div>
+{% endblock content %}
+
+
+

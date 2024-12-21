@@ -1,0 +1,23 @@
+{% extends "todo/base.html" %}
+
+{% block title %}
+    {{task.heading}}
+{% endblock title %}
+
+{% block content %}
+  {% comment %} Task Detail Card  {% endcomment %}
+  <div class="card w-75 mb-3">
+    <div class="card-body">
+      <h5 class="card-title">Delete Task</h5>
+      <p class="card-text">Task "{{ task.heading}}" will be deleted.</p>
+          <form action="" method="post">
+              {% csrf_token %}
+              <button type="submit" class="btn btn-danger">Sure</button>
+              <a href="{% url "task_detail" task.id %}" class="btn btn-primary">Cancel</a>
+            </form>
+    </div>
+  </div>
+{% endblock content %}
+
+
+
